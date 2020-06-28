@@ -7,7 +7,7 @@
       <div class="wrap-info">
         <a href="article.php/?type='.$_GET["type"].'&id='.$rows[$i][0].'" class="wrap-info__link">
           <div class="wrap-img">
-            <img class="box-news__img" src="img/boxing.jpg" alt="">
+            <img class="box-news__img" src="php/files/'.$rows[$i][6].'" alt="">
           </div>
           <span class="h3 box-news__subtitle">'.$rows[$i][3].'</span>
         </a>

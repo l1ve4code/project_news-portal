@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require_once "php/includes/connect.php";
 	if(!isset($_GET['type']) and !isset($_GET['id'])){
 		header("Location: index.php");
@@ -10,6 +11,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="../img/star-media.png" type="image/png">
 	<link rel="stylesheet" href="../libs/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/main.css">
 	<title>Document</title>
@@ -24,9 +26,19 @@
 		</div>
 		<div style="position: sticky; top: 10px;">
 			<div class="wrap-nav">
-					<?php
-						include_once "php/urls/menu.php"
-					?>
+				<nav class="nav">
+					<a class="nav__link" href="../index.html">ГЛАВНАЯ</a>
+					<a class="nav__link" href="#">КИНО</a>
+					<a class="nav__link" href="#">СПОРТ</a>
+					<a class="nav__link" href="#">МУЗЫКА</a>
+					<a class="nav__link" href="#">ИСТОРИЯ</a>
+					<a class="nav__link" href="#">ПУТЕШЕСТВИЯ</a>
+					<a class="nav__link" href="#">ИСКУССТВО</a>
+					<a class="nav__link" href="#">МОДА</a>
+					<a class="nav__link" href="#">БИЗНЕС</a>
+					<a class="nav__link" href="#">ТЕХНОЛОГИИ</a>
+					<a class="nav__link" href="#">ПОЛИТИКА</a>
+				</nav>
 				<div class="search">
 					<input class="search__input" type="search" placeholder="ПОИСК...">
 					<button class="search__btn"><img src="../img/ico/search.svg" alt=""></button>
@@ -38,9 +50,24 @@
 					<a class="social__link" href="#"><img src="../img/ico/twitter.svg" alt=""></a>
 				</div>
 			</div>
-			<div class="wrap-enter">
+			<div class="wrap-enter <?php
+															if(isset($_SESSION['user'])){
+																echo "enter-btn_disabled";
+															}
+														?>">
 				<button class="enter-btn" data-toggle="modal" data-target="#form-sign-in">ВОЙТИ</button>
 				<button class="enter-btn" data-toggle="modal" data-target="#form-sign-up">РЕГИСТРАЦИЯ</button>
+			</div>
+			<div class="wrap-enter mt-5  <?php
+																		if(!isset($_SESSION['user'])){
+																			echo "enter-btn_disabled";
+																		}
+																	?>">
+				<a class="wrap-enter__link mb-4" href="/profile.php"><img class="wrap-enter__img" src="../img/ico/acount.svg" alt=""></a>
+				<p class = "text-white"><?=$_SESSION["user"]["name"]?></p>
+				<form action="php/includes/logout.php" method = "post">
+					<button class="pl-5 pr-5 enter-btn">ВЫЙТИ</button>
+				</form>
 			</div>
 		</div>
 	</aside>
@@ -88,22 +115,21 @@
 					break;
 			}
 			
-			$data = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM articles JOIN authors ON articles.author_id = authors.id JOIN themes ON articles.theme_id = themes.id WHERE themes.name = '$type' AND articles.id = '$id'"));
-
+			$data = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM articles JOIN authors ON articles.author_id = authors.id JOIN themes ON articles.theme_id = themes.id WHERE themes.name = '$type' AND articles.id = '$id'"))[0];
 		?>
 		<main class="container-fluid main">
-			<h2 class="main__title"><?=$data["title"]?></h2>
+			<h2 class="main__title"><?=$data[3]?></h2>
 			<!-- СТАТЬЯ -->
 			<div class="box-article">
 				<div class="box-article__item">
-					<img src="<?=$data["img"]?>" alt="">
+					<img src="../php/files/<?=$data[6]?>" alt="kek">
 					<p class="box-article__info ml-4">
-						<span class="box-article__author"><?=$data["name"]?></span>
-						<span class="box-article__date"><?=$data["date"]?></span>
+						<span class="box-article__author"><?=mb_strtoupper($data[8])?></span>
+						<span class="box-article__date"><?=$data[5]?></span>
 					</p>
 				</div>
 				<div class="col-md-10 box-article__text mt-5">
-					<p><?=$data["description"]?></p>
+					<p><?=$data[4]?></p>
 				</div>
 				<div>
 					<h3 class="mt-5">ПОСЛЕДНИЕ НОВОСТИ:</h3>
