@@ -1,3 +1,9 @@
+<?php
+	require_once "php/includes/connect.php";
+	if(!isset($_GET['type']) and !isset($_GET['id'])){
+		header("Location: index.php");
+	}
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -18,19 +24,9 @@
 		</div>
 		<div style="position: sticky; top: 10px;">
 			<div class="wrap-nav">
-				<nav class="nav">
-					<a class="nav__link" href="../index.html">ГЛАВНАЯ</a>
-					<a class="nav__link" href="#">КИНО</a>
-					<a class="nav__link" href="#">СПОРТ</a>
-					<a class="nav__link" href="#">МУЗЫКА</a>
-					<a class="nav__link" href="#">ИСТОРИЯ</a>
-					<a class="nav__link" href="#">ПУТЕШЕСТВИЯ</a>
-					<a class="nav__link" href="#">ИСКУССТВО</a>
-					<a class="nav__link" href="#">МОДА</a>
-					<a class="nav__link" href="#">БИЗНЕС</a>
-					<a class="nav__link" href="#">ТЕХНОЛОГИИ</a>
-					<a class="nav__link" href="#">ПОЛИТИКА</a>
-				</nav>
+					<?php
+						include_once "php/urls/menu.php"
+					?>
 				<div class="search">
 					<input class="search__input" type="search" placeholder="ПОИСК...">
 					<button class="search__btn"><img src="../img/ico/search.svg" alt=""></button>
@@ -56,54 +52,58 @@
 		</header>
 
 		<!-- КОНТЕНТ -->
+		<?php
+			$type = $_GET["type"];
+			$id = $_GET["id"];
+			switch($type){
+				case "film":
+					$type = "кино";
+					break;
+				case "sport":
+					$type = "спорт";
+					break;
+				case "music":
+					$type = "музыка";
+					break;
+				case "history":
+					$type = "история";
+					break;
+				case "travel":
+					$type = "путешествия";
+					break;
+				case "art":
+					$type = "искусство";
+					break;
+				case "mode":
+					$type = "мода";
+					break;
+				case "business":
+					$type = "бизнес";
+					break;
+				case "tech":
+					$type = "технологии";
+					break;
+				case "politic":
+					$type = "политика";
+					break;
+			}
+			
+			$data = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM articles JOIN authors ON articles.author_id = authors.id JOIN themes ON articles.theme_id = themes.id WHERE themes.name = '$type' AND articles.id = '$id'"));
+
+		?>
 		<main class="container-fluid main">
-			<h2 class="main__title">Заголовок из БД</h2>
+			<h2 class="main__title"><?=$data["title"]?></h2>
 			<!-- СТАТЬЯ -->
 			<div class="box-article">
 				<div class="box-article__item">
-					<img src="../img/poli.jpg" alt="">
+					<img src="<?=$data["img"]?>" alt="">
 					<p class="box-article__info ml-4">
-						<span class="box-article__author">АВТОР: ИЗ БД</span>
-						<span class="box-article__date">ДАТА ИЗ БД</span>
+						<span class="box-article__author"><?=$data["name"]?></span>
+						<span class="box-article__date"><?=$data["date"]?></span>
 					</p>
 				</div>
 				<div class="col-md-10 box-article__text mt-5">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis illum dignissimos ullam error eius
-						adipisci? Hic, ea tempore quam cupiditate quisquam earum repellat natus quidem pariatur totam accusamus
-						porro ipsam magni voluptate? Veniam asperiores commodi beatae molestiae? Saepe minus labore vel quod
-						harum. Ratione omnis nulla modi earum sapiente, natus delectus ea quis assumenda nihil nobis consequatur
-						odit hic, quaerat aliquam voluptatem maxime qui ex alias laborum consectetur aliquid. Deleniti praesentium
-						animi autem. Deleniti veritatis qui delectus totam, esse asperiores eligendi id libero sed atque sapiente
-						recusandae ullam doloremque, veniam perferendis reiciendis quo fugit odio magnam nulla? Esse debitis
-						aperiam, nobis rem pariatur labore dignissimos illum excepturi quis nisi, asperiores maxime quod
-						laboriosam distinctio neque id consequuntur vitae exercitationem est, illo eaque laborum accusantium vel.
-						Voluptate dolore obcaecati fuga maiores deleniti unde. Esse quod unde asperiores earum dolore tempora?
-						Quaerat non vitae eligendi minus recusandae officia quos et dolorem perspiciatis!
-					</p>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis illum dignissimos ullam error eius
-						adipisci? Hic, ea tempore quam cupiditate quisquam earum repellat natus quidem pariatur totam accusamus
-						porro ipsam magni voluptate? Veniam asperiores commodi beatae molestiae? Saepe minus labore vel quod
-						harum. Ratione omnis nulla modi earum sapiente, natus delectus ea quis assumenda nihil nobis consequatur
-						odit hic, quaerat aliquam voluptatem maxime qui ex alias laborum consectetur aliquid. Deleniti praesentium
-						animi autem. Deleniti veritatis qui delectus totam, esse asperiores eligendi id libero sed atque sapiente
-						recusandae ullam doloremque, veniam perferendis reiciendis quo fugit odio magnam nulla? Esse debitis
-						aperiam, nobis rem pariatur labore dignissimos illum excepturi quis nisi, asperiores maxime quod
-						laboriosam distinctio neque id consequuntur vitae exercitationem est, illo eaque laborum accusantium vel.
-						Voluptate dolore obcaecati fuga maiores deleniti unde. Esse quod unde asperiores earum dolore tempora?
-						Quaerat non vitae eligendi minus recusandae officia quos et dolorem perspiciatis!
-					</p>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis illum dignissimos ullam error eius
-						adipisci? Hic, ea tempore quam cupiditate quisquam earum repellat natus quidem pariatur totam accusamus
-						porro ipsam magni voluptate? Veniam asperiores commodi beatae molestiae? Saepe minus labore vel quod
-						harum. Ratione omnis nulla modi earum sapiente, natus delectus ea quis assumenda nihil nobis consequatur
-						odit hic, quaerat aliquam voluptatem maxime qui ex alias laborum consectetur aliquid. Deleniti praesentium
-						animi autem. Deleniti veritatis qui delectus totam, esse asperiores eligendi id libero sed atque sapiente
-						recusandae ullam doloremque, veniam perferendis reiciendis quo fugit odio magnam nulla? Esse debitis
-						aperiam, nobis rem pariatur labore dignissimos illum excepturi quis nisi, asperiores maxime quod
-						laboriosam distinctio neque id consequuntur vitae exercitationem est, illo eaque laborum accusantium vel.
-						Voluptate dolore obcaecati fuga maiores deleniti unde. Esse quod unde asperiores earum dolore tempora?
-						Quaerat non vitae eligendi minus recusandae officia quos et dolorem perspiciatis!
-					</p>
+					<p><?=$data["description"]?></p>
 				</div>
 				<div>
 					<h3 class="mt-5">ПОСЛЕДНИЕ НОВОСТИ:</h3>
