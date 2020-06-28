@@ -1,0 +1,16 @@
+.wrap-content {
+	width: 100%;
+}
+
+header {
+	width: 100%;
+	border-bottom: 15px solid map-get($colors, bg-sidebar);
+}
+
+.logo {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	> a {
+	color: map-get($colors, main);
+	}
+}

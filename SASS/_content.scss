@@ -1,0 +1,102 @@
+body {
+	background: map-get($colors, bg-main);
+}
+
+.main {
+	margin: 70px auto;
+}
+
+.logo {
+	font-weight: bold;
+}
+
+.box-news {
+	&__item {
+		max-width: 400px;
+		min-width: 200px;
+		width: 100%;
+		margin-right: 15px;
+		margin-top: 15px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__title {
+		margin: 0;
+		color: map-get($colors, title);
+
+		&:hover {
+			@include lightColor (title, 20%);
+		}
+	}
+
+	&__date {
+		margin-left: 10px;
+		color: map-get($colors, date);
+	}
+
+	&__img {
+		width: 100%;
+		height: 50%;
+	}
+
+	&__subtitle {
+		font-weight: bold;
+		color: map-get($colors, main);
+	}
+
+	&__text {
+		height: 0;
+		font-size: 0;
+
+		.wrap-info:hover & {
+			height: inherit;
+			font-size: inherit;
+		}
+	}
+
+	.underline {
+		border-bottom: 2px solid map-get($colors, main);
+		padding-bottom: 30px;
+	}
+}
+
+.wrap-info {
+	&__link {
+		display: flex;
+		flex-direction: column;
+
+		>span {
+			display: block;
+
+			.wrap-info:hover &,
+			&:hover {
+				color: map-get($colors, title);
+			}
+		}
+	}
+}
+
+.wrap-img {
+	position: relative;
+
+	&:before {
+		content: '';
+		position: absolute;
+		background: #0000005b;
+		transition: .3s;
+		opacity: 0;
+		z-index: 20;
+		width: 100%;
+		height: 100%;
+	}
+
+	&:hover {
+		box-shadow: 0 2px 15px #181A51;
+
+		&:before {
+			opacity: 1;
+			transition: .3s;
+		}
+	}
+}

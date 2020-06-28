@@ -1,0 +1,9 @@
+.footer {
+	background: map-get($colors, bg-sidebar);
+	color: map-get($colors, txt-sidebar);
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

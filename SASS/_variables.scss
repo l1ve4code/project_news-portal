@@ -1,0 +1,21 @@
+
+// ЦВЕТА
+$colors: (
+	bg-main: #E9F4FF,
+	bg-sidebar: #181A51,
+	txt-sidebar: #fff,
+	title: #C01E1E,
+	date: #727272,
+	main: #000,
+	minor: #5086BB
+);
+
+// ОСНОВНЫЕ РАЗМЕРЫ
+$sizes: (
+	fz: 1.3rem
+);
+
+// ИЗМЕНЕНИЕ ЦВЕТА
+@mixin lightColor ($col, $val) {
+	color: scale-color(map-get($colors, $col), $lightness: $val);
+}
