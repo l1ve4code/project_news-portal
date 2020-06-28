@@ -26,19 +26,9 @@
 		</div>
 		<div style="position: sticky; top: 10px;">
 			<div class="wrap-nav">
-				<nav class="nav">
-					<a class="nav__link" href="../index.html">ГЛАВНАЯ</a>
-					<a class="nav__link" href="#">КИНО</a>
-					<a class="nav__link" href="#">СПОРТ</a>
-					<a class="nav__link" href="#">МУЗЫКА</a>
-					<a class="nav__link" href="#">ИСТОРИЯ</a>
-					<a class="nav__link" href="#">ПУТЕШЕСТВИЯ</a>
-					<a class="nav__link" href="#">ИСКУССТВО</a>
-					<a class="nav__link" href="#">МОДА</a>
-					<a class="nav__link" href="#">БИЗНЕС</a>
-					<a class="nav__link" href="#">ТЕХНОЛОГИИ</a>
-					<a class="nav__link" href="#">ПОЛИТИКА</a>
-				</nav>
+					<?php
+						include_once "php/urls/menu.php";
+					?>
 				<div class="search">
 					<input class="search__input" type="search" placeholder="ПОИСК...">
 					<button class="search__btn"><img src="../img/ico/search.svg" alt=""></button>
@@ -72,7 +62,7 @@
 		</div>
 	</aside>
 
-	<div class="wrap-content">
+	<div class="wrap-content" style="height: 100%;">
 		<!-- ШАПКА -->
 		<header>
 			<h1 class="container-fluid logo"><a href="../index.html">STAR MEDIA</a></h1>
@@ -117,7 +107,17 @@
 			
 			$data = mysqli_fetch_all(mysqli_query($connect, "SELECT * FROM articles JOIN authors ON articles.author_id = authors.id JOIN themes ON articles.theme_id = themes.id WHERE themes.name = '$type' AND articles.id = '$id'"))[0];
 		?>
-		<main class="container-fluid main">
+		<main class="container-fluid main mt-3">
+				<?php
+					switch($_SESSION["user"]["type"]){
+						case "admin":
+							include_once "php/urls/edit.php";
+							break;
+						case "author":
+							include_once "php/urls/edit.php";
+							break;
+					}
+				?>
 			<h2 class="main__title"><?=$data[3]?></h2>
 			<!-- СТАТЬЯ -->
 			<div class="box-article">
@@ -180,20 +180,20 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form action = "php/auth/signin.php" method = "post">
 						<div class="form-group">
-							<label for="enter-log" class="col-form-label"><span class="text-danger">*</span> Логин:</label>
-							<input type="text" class="form-control" id="enter-log" placeholder="Введите ваш логин">
+							<label for="enter-log" class="col-form-label"><span class="text-danger">*</span> E-Mail:</label>
+							<input type="text" class="form-control" id="enter-log" placeholder="Введите ваш e-mail" name = "email">
 						</div>
 						<div class="form-group">
 							<label for="enter-pass" class="col-form-label"><span class="text-danger">*</span> Пароль:</label>
-							<input type="text" class="form-control" id="enter-pass" placeholder="Введите ваш пароль">
+							<input type="password" class="form-control" id="enter-pass" placeholder="Введите ваш пароль" name = "password">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+							<button type="submit" class="btn btn-primary">Войти</button>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-					<button type="button" class="btn btn-primary">Войти</button>
 				</div>
 			</div>
 		</div>
@@ -210,42 +210,35 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form action = "php/register/signup.php" method = "post">
 						<div class="form-group">
 							<label for="reg-name" class="col-form-label"><span class="text-danger">*</span> ФИО:</label>
-							<input type="text" class="form-control" id="reg-name" placeholder="Введите ваше ФИО">
+							<input type="text" class="form-control" id="reg-name" placeholder="Введите ваше ФИО" name = "name">
 						</div>
 						<div class="form-group">
 							<label for="reg-mail" class="col-form-label"><span class="text-danger">*</span> E-mail:</label>
-							<input type="email" class="form-control" id="reg-mail" placeholder="Введите ваш e-mail">
+							<input type="email" class="form-control" id="reg-mail" placeholder="Введите ваш e-mail" name = "email">
 						</div>
 						<div class="form-group">
 							<label for="reg-pass" class="col-form-label"><span class="text-danger">*</span> Пароль:</label>
-							<input type="password" class="form-control" id="reg-pass" placeholder="Придумайте надежный пароль">
+							<input type="password" class="form-control" id="reg-pass" placeholder="Придумайте надежный пароль" name = "pass1">
 						</div>
 						<div class="form-group">
-							<label for="reg-pass-confirm" class="col-form-label"><span class="text-danger">*</span> Повторите
-								пароль:</label>
-							<input type="password" class="form-control" id="reg-pass-confirm" placeholder="Повторите пароль">
+							<label for="reg-pass-confirm" class="col-form-label"><span class="text-danger">*</span> Повторите пароль:</label>
+							<input type="password" class="form-control" id="reg-pass-confirm" placeholder="Повторите пароль" name = "pass2">
 						</div>
 						<div class="form-group"><span class="text-danger">*</span> Зарегистрироваться как:</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="reg-check" id="reg-check-user" value="">
-							<label class="form-check-label" for="reg-check-user">
-								Пользователь
-							</label>
+						<div class="form-group">
+							<select class = "form-control" name="type" id="">
+								<option value="user">Пользователь</option>
+								<option value="author">Автор статьи</option>
+							</select>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="reg-check" id="reg-check-author" value="">
-							<label class="form-check-label" for="reg-check-author">
-								Автор статьи
-							</label>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+							<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-					<button type="button" class="btn btn-primary">Зарегистрироваться</button>
 				</div>
 			</div>
 		</div>
