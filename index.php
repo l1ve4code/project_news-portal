@@ -51,7 +51,8 @@
 																			echo "enter-btn_disabled";
 																		}
 																	?>">
-				<a class="wrap-enter__link mb-4" href="profile.php"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
+				<a class="wrap-enter__link mb-4" href="/profile.php"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
+				<p class = "text-white"><?=$_SESSION["user"]["name"]?></p>
 				<form action="php/includes/logout.php" method = "post">
 					<button class="pl-5 pr-5 enter-btn">ВЫЙТИ</button>
 				</form>
@@ -133,7 +134,7 @@
 						</div>
 						<div class="form-group">
 							<label for="enter-pass" class="col-form-label"><span class="text-danger">*</span> Пароль:</label>
-							<input type="text" class="form-control" id="enter-pass" placeholder="Введите ваш пароль" name = "password">
+							<input type="password" class="form-control" id="enter-pass" placeholder="Введите ваш пароль" name = "password">
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>

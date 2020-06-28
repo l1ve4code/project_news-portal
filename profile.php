@@ -51,7 +51,8 @@
 																			echo "enter-btn_disabled";
 																		}
 																	?>">
-				<a class="wrap-enter__link mb-4" href="#"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
+				<a class="wrap-enter__link mb-4" href="/profile.php"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
+				<p class = "text-white"><?=$_SESSION["user"]["name"]?></p>
 				<form action="php/includes/logout.php" method = "post">
 					<button class="pl-5 pr-5 enter-btn">ВЫЙТИ</button>
 				</form>
@@ -69,6 +70,7 @@
 		<main class="container main">
 			<h2 class="main__title">ЛИЧНЫЙ КАБИНЕТ</h2>
 				<?php
+					require_once "php/includes/connect.php";
 					switch($_SESSION["user"]["type"]){
 						case "admin":
 							include_once "php/urls/admin.php";
