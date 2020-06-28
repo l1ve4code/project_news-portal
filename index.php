@@ -1,3 +1,9 @@
+<?php
+
+	session_start();
+	unset($_SESSION["user"]);
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -42,9 +48,13 @@
 					<a class="social__link" href="#"><img src="img/ico/twitter.svg" alt=""></a>
 				</div>
 			</div>
-			<div class="wrap-enter">
+			<div class="wrap-enter enter-btn_disabled">
 				<button class="enter-btn" data-toggle="modal" data-target="#form-sign-in">ВОЙТИ</button>
 				<button class="enter-btn" data-toggle="modal" data-target="#form-sign-up">РЕГИСТРАЦИЯ</button>
+			</div>
+			<div class="wrap-enter mt-5  enter-btn_disabled">
+				<a class="wrap-enter__link mb-4" href="#"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
+				<button class="enter-btn">ВЫЙТИ</button>
 			</div>
 		</div>
 	</aside>
@@ -144,20 +154,20 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form action = "php/auth/signin.php" method = "post">
 						<div class="form-group">
-							<label for="enter-log" class="col-form-label"><span class="text-danger">*</span> Логин:</label>
-							<input type="text" class="form-control" id="enter-log" placeholder="Введите ваш логин">
+							<label for="enter-log" class="col-form-label"><span class="text-danger">*</span> E-Mail:</label>
+							<input type="text" class="form-control" id="enter-log" placeholder="Введите ваш e-mail" name = "email">
 						</div>
 						<div class="form-group">
 							<label for="enter-pass" class="col-form-label"><span class="text-danger">*</span> Пароль:</label>
-							<input type="text" class="form-control" id="enter-pass" placeholder="Введите ваш пароль">
+							<input type="text" class="form-control" id="enter-pass" placeholder="Введите ваш пароль" name = "password">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+							<button type="submit" class="btn btn-primary">Войти</button>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-					<button type="button" class="btn btn-primary">Войти</button>
 				</div>
 			</div>
 		</div>
@@ -174,41 +184,35 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form action = "php/register/signup.php" method = "post">
 						<div class="form-group">
 							<label for="reg-name" class="col-form-label"><span class="text-danger">*</span> ФИО:</label>
-							<input type="text" class="form-control" id="reg-name" placeholder="Введите ваше ФИО">
+							<input type="text" class="form-control" id="reg-name" placeholder="Введите ваше ФИО" name = "name">
 						</div>
 						<div class="form-group">
 							<label for="reg-mail" class="col-form-label"><span class="text-danger">*</span> E-mail:</label>
-							<input type="email" class="form-control" id="reg-mail" placeholder="Введите ваш e-mail">
+							<input type="email" class="form-control" id="reg-mail" placeholder="Введите ваш e-mail" name = "email">
 						</div>
 						<div class="form-group">
 							<label for="reg-pass" class="col-form-label"><span class="text-danger">*</span> Пароль:</label>
-							<input type="password" class="form-control" id="reg-pass" placeholder="Придумайте надежный пароль">
+							<input type="password" class="form-control" id="reg-pass" placeholder="Придумайте надежный пароль" name = "pass1">
 						</div>
 						<div class="form-group">
 							<label for="reg-pass-confirm" class="col-form-label"><span class="text-danger">*</span> Повторите пароль:</label>
-							<input type="password" class="form-control" id="reg-pass-confirm" placeholder="Повторите пароль">
+							<input type="password" class="form-control" id="reg-pass-confirm" placeholder="Повторите пароль" name = "pass2">
 						</div>
 						<div class="form-group"><span class="text-danger">*</span> Зарегистрироваться как:</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="reg-check" id="reg-check-user" value="">
-							<label class="form-check-label" for="reg-check-user">
-								Пользователь
-							</label>
+						<div class="form-group">
+							<select class = "form-control" name="type" id="">
+								<option value="user">Пользователь</option>
+								<option value="author">Автор статьи</option>
+							</select>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="reg-check" id="reg-check-author" value="">
-							<label class="form-check-label" for="reg-check-author">
-								Автор статьи
-							</label>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+							<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-					<button type="button" class="btn btn-primary">Зарегистрироваться</button>
 				</div>
 			</div>
 		</div>
