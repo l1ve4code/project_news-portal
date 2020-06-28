@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
 	<!-- НАВИГАЦИЯ -->
 	<aside class="sidebar">
 		<div class="burger">
@@ -145,11 +146,11 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="enter-log" class="col-form-label">Логин:</label>
+							<label for="enter-log" class="col-form-label"><span class="text-danger">*</span> Логин:</label>
 							<input type="text" class="form-control" id="enter-log" placeholder="Введите ваш логин">
 						</div>
 						<div class="form-group">
-							<label for="enter-pass" class="col-form-label">Пароль:</label>
+							<label for="enter-pass" class="col-form-label"><span class="text-danger">*</span> Пароль:</label>
 							<input type="text" class="form-control" id="enter-pass" placeholder="Введите ваш пароль">
 						</div>
 					</form>
@@ -175,20 +176,33 @@
 				<div class="modal-body">
 					<form>
 						<div class="form-group">
-							<label for="reg-name" class="col-form-label">Введите ФИО</label>
+							<label for="reg-name" class="col-form-label"><span class="text-danger">*</span> ФИО:</label>
 							<input type="text" class="form-control" id="reg-name" placeholder="Введите ваше ФИО">
 						</div>
 						<div class="form-group">
-							<label for="reg-mail" class="col-form-label">Введите e-mail</label>
+							<label for="reg-mail" class="col-form-label"><span class="text-danger">*</span> E-mail:</label>
 							<input type="email" class="form-control" id="reg-mail" placeholder="Введите ваш e-mail">
 						</div>
 						<div class="form-group">
-							<label for="reg-pass" class="col-form-label">Придумайте пароль</label>
+							<label for="reg-pass" class="col-form-label"><span class="text-danger">*</span> Пароль:</label>
 							<input type="password" class="form-control" id="reg-pass" placeholder="Придумайте надежный пароль">
 						</div>
 						<div class="form-group">
-							<label for="reg-pass-confirm" class="col-form-label">Повторите пароль</label>
+							<label for="reg-pass-confirm" class="col-form-label"><span class="text-danger">*</span> Повторите пароль:</label>
 							<input type="password" class="form-control" id="reg-pass-confirm" placeholder="Повторите пароль">
+						</div>
+						<div class="form-group"><span class="text-danger">*</span> Зарегистрироваться как:</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="reg-check" id="reg-check-user" value="">
+							<label class="form-check-label" for="reg-check-user">
+								Пользователь
+							</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="reg-check" id="reg-check-author" value="">
+							<label class="form-check-label" for="reg-check-author">
+								Автор статьи
+							</label>
 						</div>
 					</form>
 				</div>
