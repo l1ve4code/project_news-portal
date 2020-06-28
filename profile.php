@@ -1,5 +1,6 @@
 <?php 
 	session_start();
+	require_once "php/includes/connect.php";
 	if(!isset($_SESSION["user"])){
 		header("Location: index.php");
 	} 
@@ -69,6 +70,117 @@
 
 		<!-- КОНТЕНТ -->
 		<main class="container main">
+			  <!-- Модальное окно -->
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">Удаление</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action = "php/includes/delete.php/?who=<?=$_GET["who"]?>" method = "POST">
+								<div class="form-group">
+										<label for="disabledSelect">Выберете</label>
+										<select id="disabledSelect" class="form-control" name = "option">
+											<option>Выбрать</option>
+											<?php
+												if($_GET["who"] == "authors"){
+													$arr = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `authors`")); 
+												}
+												else if($_GET["who"] == "users"){
+													$arr = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `users`")); 
+												}
+												else if($_GET["who"] == "articles"){
+													$arr = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `articles`")); 
+												}
+												for($i = 0; $i < count(array_keys($arr)); $i++){
+													echo "<option value = '".array_keys($arr)[$i]."'>".array_keys($arr)[$i]."</option>";
+												}
+											?>
+										</select>
+									</div><br>
+									<div class="form-group">
+										<label for="disabledTextInput">Данные</label>
+										<input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input" name = "text">
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">Подтверждаю свои действия
+											<input class="form-check-input ml-2" type="checkbox" name = "enabled">
+										</label>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+										<input type = "submit" value = "Удалить" class="btn btn-danger">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				    <!-- Модальное окно изменения -->
+				<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">Редактирование</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="" method="POST">
+									<div class="form-group">
+										<label>Введите 
+										<?php
+											if($_GET["who"] == "branch"){
+												echo "branch_code";
+											}
+											else if($_GET["type"] == "product"){
+												echo "articles";
+											}
+											else if($_GET["type"] == "sales"){
+												echo "sales_id";
+											}
+										?>
+										</label>
+										<input type="text" class="form-control" placeholder="Введите ID" name="unique_id">
+									</div>
+									<div class="form-group">
+									<?php
+											for($i = 0; $i < count(array_keys($arr[0])); $i++){
+												if($_GET["type"] == "branch" && $i == 0){
+													continue;
+												}
+												else if($_GET["type"] == "product" && $i == 3){
+													continue;
+												}
+												else if($_GET["type"] == "sales" && $i == 4){
+													continue;
+												}
+												echo "<label>".array_keys($arr[0])[$i]."</label>";
+												echo "<input type='text' class='form-control' placeholder='Введите данные' name='edit".$i."'>";
+											}
+										?>
+									</div>
+									<div class="form-check p-0 mb-3">
+										<label class="form-check-label">Подтверждаю свои действия
+											<input class="form-check-input ml-2" type="checkbox" name = "editable">
+										</label>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+										<input type="submit" value="Сохранить" class="btn btn-primary">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			<h2 class="main__title">ЛИЧНЫЙ КАБИНЕТ</h2>
 				<?php
 					require_once "php/includes/connect.php";
