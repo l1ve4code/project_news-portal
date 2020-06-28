@@ -1,7 +1,7 @@
 <?php
 
 	session_start();
-	unset($_SESSION["user"]);
+	require_once "php/includes/connect.php";
 
 ?>
 <!DOCTYPE html>
@@ -24,19 +24,9 @@
 		</div>
 		<div style="position: sticky; top: 10px;">
 			<div class="wrap-nav">
-				<nav class="nav">
-					<a class="nav__link" href="#">ГЛАВНАЯ</a>
-					<a class="nav__link" href="#">КИНО</a>
-					<a class="nav__link" href="#">СПОРТ</a>
-					<a class="nav__link" href="#">МУЗЫКА</a>
-					<a class="nav__link" href="#">ИСТОРИЯ</a>
-					<a class="nav__link" href="#">ПУТЕШЕСТВИЯ</a>
-					<a class="nav__link" href="#">ИСКУССТВО</a>
-					<a class="nav__link" href="#">МОДА</a>
-					<a class="nav__link" href="#">БИЗНЕС</a>
-					<a class="nav__link" href="#">ТЕХНОЛОГИИ</a>
-					<a class="nav__link" href="#">ПОЛИТИКА</a>
-				</nav>
+					<?php
+						include_once "php/urls/menu.php"
+					?>
 				<div class="search">
 					<input class="search__input" type="search" placeholder="ПОИСК...">
 					<button class="search__btn"><img src="img/ico/search.svg" alt=""></button>
@@ -48,13 +38,23 @@
 					<a class="social__link" href="#"><img src="img/ico/twitter.svg" alt=""></a>
 				</div>
 			</div>
-			<div class="wrap-enter enter-btn_disabled">
+			<div class="wrap-enter <?php
+															if(isset($_SESSION['user'])){
+																echo "enter-btn_disabled";
+															}
+														?>">
 				<button class="enter-btn" data-toggle="modal" data-target="#form-sign-in">ВОЙТИ</button>
 				<button class="enter-btn" data-toggle="modal" data-target="#form-sign-up">РЕГИСТРАЦИЯ</button>
 			</div>
-			<div class="wrap-enter mt-5  enter-btn_disabled">
+			<div class="wrap-enter mt-5  <?php
+																		if(!isset($_SESSION['user'])){
+																			echo "enter-btn_disabled";
+																		}
+																	?>">
 				<a class="wrap-enter__link mb-4" href="#"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
-				<button class="enter-btn">ВЫЙТИ</button>
+				<form action="php/includes/logout.php" method = "post">
+					<button class="pl-5 pr-5 enter-btn">ВЫЙТИ</button>
+				</form>
 			</div>
 		</div>
 	</aside>
@@ -67,73 +67,45 @@
 
 		<!-- КОНТЕНТ -->
 		<main class="container main">
-			<h2 class="main__title">НОВОСТИ</h2>
-			<div class="box-news">
-				<div class="box-news__item">
-					<p class="m-0"><a class="box-news__title" href="#">ПОЛИТИКА</a> <span class="box-news__date">ДАТА
-							ДОБАВЛЕНИЯ</span></p>
-					<div class="wrap-info">
-						<a href="#" class="wrap-info__link">
-							<div class="wrap-img">
-								<img class="box-news__img" src="img/Lukashenko.jpg" alt="Лукашенко">
-							</div>
-							<span class="h3 box-news__subtitle">Лукашенко назвал Москву столицей родины</span>
-						</a>
-						<p class="box-news__text">ТЕКСТ СТАТЬИ ИЗ БД</p>
-					</div>
-				</div>
-				<div class="box-news__item">
-					<p class="m-0"><a class="box-news__title" href="#">СПОРТ</a> <span class="box-news__date">ДАТА
-							ДОБАВЛЕНИЯ</span></p>
-					<div class="wrap-info">
-						<a href="#" class="wrap-info__link">
-							<div class="wrap-img">
-								<img class="box-news__img" src="img/boxing.jpg" alt="Лукашенко">
-							</div>
-							<span class="h3 box-news__subtitle">Лукашенко назвал Москву столицей родины</span>
-						</a>
-						<p class="box-news__text">ТЕКСТ СТАТЬИ ИЗ БД</p>
-					</div>
-				</div>
-				<div class="box-news__item">
-					<div>
-						<p class="m-0"><a class="box-news__title" href="#">КИНО</a> <span class="box-news__date">ДАТА
-								ДОБАВЛЕНИЯ</span></p>
-						<a href="#" class="wrap-info__link">
-							<span class="h3 box-news__subtitle underline">"Унесенных ветром" вернули на экраны</span>
-						</a>
-					</div>
-					<div>
-						<p class="m-0"><a class="box-news__title" href="#">ТЕХНОЛОГИИ</a> <span class="box-news__date">ДАТА
-								ДОБАВЛЕНИЯ</span></p>
-						<a href="#" class="wrap-info__link">
-							<span class="h3 box-news__subtitle underline">Грузовик с тысячами iPhone перевернулся и сгорел</span>
-						</a>
-					</div>
-					<div>
-						<p class="m-0"><a class="box-news__title" href="#">МУЗЫКА</a> <span class="box-news__date">ДАТА
-								ДОБАВЛЕНИЯ</span></p>
-						<a href="#" class="wrap-info__link">
-							<span class="h3 box-news__subtitle underline">Девушки в платьях, дьявол в лимузине и малолетние мафиози:
-								главная
-								музыка месяца</span>
-						</a>
-					</div>
-				</div>
-				<div class="box-news__item">
-					<p class="m-0"><a class="box-news__title" href="#">ПУТЕШЕСТВИЯ</a> <span class="box-news__date">ДАТА
-							ДОБАВЛЕНИЯ</span></p>
-					<div class="wrap-info">
-						<a href="#" class="wrap-info__link">
-							<div class="wrap-img">
-								<img class="box-news__img" src="img/train.png" alt="Лукашенко">
-							</div>
-							<span class="h3 box-news__subtitle">Запасной выход</span>
-						</a>
-						<p class="box-news__text">ТЕКСТ СТАТЬИ ИЗ БД</p>
-					</div>
-				</div>
-			</div>
+			<?php
+				if(isset($_GET["type"])){
+					switch($_GET["type"]){
+						case "film":
+							include_once "php/news-pages/film.php";
+							break;
+						case "sport":
+							include_once "php/news-pages/sport.php";
+							break;
+						case "music":
+							include_once "php/news-pages/music.php";
+							break;
+						case "history":
+							include_once "php/news-pages/history.php";
+							break;
+						case "travel":
+							include_once "php/news-pages/travel.php";
+							break;
+						case "art":
+							include_once "php/news-pages/art.php";
+							break;
+						case "mode":
+							include_once "php/news-pages/mode.php";
+							break;
+						case "business":
+							include_once "php/news-pages/business.php";
+							break;
+						case "tech":
+							include_once "php/news-pages/tech.php";
+							break;
+						case "politic":
+							include_once "php/news-pages/politic.php";
+							break;
+					}
+				}
+				else{
+					include_once "php/news-pages/main.php";
+				}
+			?>
 		</main>
 
 
