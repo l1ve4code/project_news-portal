@@ -7,15 +7,15 @@
     $text = $_POST["text"];
     if($_GET["who"] == "authors"){
       mysqli_query($connect, "DELETE FROM authors WHERE $type = '$text'");
-      header("Location: ../../../profile.php/?who=authors");
+      header("Location: /profile.php");
     }
     else if($_GET["who"] == "users"){
       mysqli_query($connect, "DELETE FROM users WHERE $type = '$text'");
-      header("Location: ../../../profile.php/?who=users");
+      header("Location: /profile.php/");
     }
     else if($_GET["who"] == "articles"){
       mysqli_query($connect, "DELETE FROM articles WHERE $type = '$text'");
-      header("Location: ../../../profile.php/?who=articles");
+      header("Location: /profile.php/");
     }
   }else{
     die("Вы не подтвердили свое действие!");

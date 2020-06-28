@@ -133,36 +133,20 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form action="" method="POST">
+								<form action="php/includes/edit.php/?who=articles" method="POST">
 									<div class="form-group">
-										<label>Введите 
-										<?php
-											if($_GET["who"] == "branch"){
-												echo "branch_code";
-											}
-											else if($_GET["type"] == "product"){
-												echo "articles";
-											}
-											else if($_GET["type"] == "sales"){
-												echo "sales_id";
-											}
-										?>
+										<label>Введите ID
 										</label>
 										<input type="text" class="form-control" placeholder="Введите ID" name="unique_id">
 									</div>
 									<div class="form-group">
 									<?php
-											for($i = 0; $i < count(array_keys($arr[0])); $i++){
-												if($_GET["type"] == "branch" && $i == 0){
+										$arr = mysqli_fetch_assoc(mysqli_query($connect, "SELECT * FROM `articles`")); 
+											for($i = 0; $i < count(array_keys($arr)); $i++){
+												if($_GET["who"] == "articles" && $i == 0){
 													continue;
 												}
-												else if($_GET["type"] == "product" && $i == 3){
-													continue;
-												}
-												else if($_GET["type"] == "sales" && $i == 4){
-													continue;
-												}
-												echo "<label>".array_keys($arr[0])[$i]."</label>";
+												echo "<label>".array_keys($arr)[$i]."</label>";
 												echo "<input type='text' class='form-control' placeholder='Введите данные' name='edit".$i."'>";
 											}
 										?>
