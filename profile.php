@@ -68,16 +68,19 @@
 		<!-- КОНТЕНТ -->
 		<main class="container main">
 			<h2 class="main__title">ЛИЧНЫЙ КАБИНЕТ</h2>
-			<h3 class="mt-5">ПОДПИСКИ:</h3>
-			<ol class="sub-list">
-				<li class="sub-list__item"><span class="sub-list__title">СПОРТ</span> <a class="sub-list__link" href="#">ОТПИСАТЬСЯ</a></li>
-				<li class="sub-list__item"><span class="sub-list__title">МУЗЫКА</span> <a class="sub-list__link" href="#">ОТПИСАТЬСЯ</a></li>
-			</ol>
-			<a class="main__news" href="#">ПРЕДЛОЖИТЬ НОВОСТЬ</a>
-			<a class="main__news" href="#">ТАБЛИЦА АВТОРОВ</a>
-			<a class="main__news" href="#">ТАБЛИЦА ПОЛЬЗОВАТЕЛЕЙ</a>
-			<a class="main__news" href="#">ТАБЛИЦА СТАТЕЙ</a>
-
+				<?php
+					switch($_SESSION["user"]["type"]){
+						case "admin":
+							include_once "php/urls/admin.php";
+							break;
+						case "author":
+							include_once "php/urls/authors.php";
+							break;
+						case "user":
+							include_once "php/urls/subs.php";
+							break;
+					}
+				?>
 		</main>
 
 		<footer class="footer">

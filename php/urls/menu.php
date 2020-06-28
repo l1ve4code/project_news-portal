@@ -1,5 +1,5 @@
 <nav class="nav">
-					<a class="nav__link" href="#">ГЛАВНАЯ</a>
+					<a class="nav__link" href="/">ГЛАВНАЯ</a>
 					<a class="nav__link" href="/?type=film">КИНО</a>
 					<a class="nav__link" href="/?type=sport">СПОРТ</a>
 					<a class="nav__link" href="/?type=music">МУЗЫКА</a>

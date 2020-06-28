@@ -51,7 +51,7 @@
 																			echo "enter-btn_disabled";
 																		}
 																	?>">
-				<a class="wrap-enter__link mb-4" href="#"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
+				<a class="wrap-enter__link mb-4" href="profile.php"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
 				<form action="php/includes/logout.php" method = "post">
 					<button class="pl-5 pr-5 enter-btn">ВЫЙТИ</button>
 				</form>
