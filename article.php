@@ -168,7 +168,43 @@
 			<span class="footer__text">&#169; Все права защищены</span>
 		</footer>
 	</div>
-
+	<div class="modal fade" id="edit" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Редактирование</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="/php/includes/form_edit.php/?type=<?=$_GET["type"]?>&id=<?=$_GET["id"]?>" method="POST" enctype="multipart/form-data">
+						<div class="form-group">
+							<label>Заголовок: </label>
+							<input type='text' class='form-control' placeholder='Введите данные' name='edit1'>
+							<label>Описание: </label>
+							<input type='text' class='form-control' placeholder='Введите данные' name='edit2'>
+						</div>
+						<label for="">Изображение: </label>
+						<div class = "custom-file">
+							<input type="file" class="custom-file-input" id="customFile" name = "edit3">
+							<label class="custom-file-label" for="customFile">Choose file</label>
+						</div>
+						<div class="form-check p-0 mb-3">
+							<label class="form-check-label">Подтверждаю свои действия
+								<input class="form-check-input ml-2" type="checkbox" name = "editable">
+							</label>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+							<input type="submit" value="Сохранить" class="btn btn-primary">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- ФОРМА ВХОДА -->
 	<div class="modal fade" id="form-sign-in">
 		<div class="modal-dialog">
