@@ -16,6 +16,6 @@
 
   mysqli_query($connect, "INSERT INTO `articles` (`id`, `theme_id`, `author_id`, `title`, `description`, `date`, `img`) VALUES (NULL, '$type', '$author_id', '$title', '$description', '$date', '$path')");
   
-  header('Location: /index.html');
+  header('Location: /index.php');
 
 ?>
