@@ -180,7 +180,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action = "php/auth/signin.php" method = "post">
+					<form action = "/php/auth/signin.php" method = "post">
 						<div class="form-group">
 							<label for="enter-log" class="col-form-label"><span class="text-danger">*</span> E-Mail:</label>
 							<input type="text" class="form-control" id="enter-log" placeholder="Введите ваш e-mail" name = "email">
@@ -210,7 +210,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action = "php/register/signup.php" method = "post">
+					<form action = "/php/register/signup.php" method = "post">
 						<div class="form-group">
 							<label for="reg-name" class="col-form-label"><span class="text-danger">*</span> ФИО:</label>
 							<input type="text" class="form-control" id="reg-name" placeholder="Введите ваше ФИО" name = "name">

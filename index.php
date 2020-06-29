@@ -3,6 +3,11 @@
 	session_start();
 	require_once "php/includes/connect.php";
 
+	$type = $_GET["type"];
+	if(!isset($_GET["type"])){
+		$type = "";
+	}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -28,10 +33,10 @@
 					<?php
 						include_once "php/urls/menu.php"
 					?>
-				<div class="search">
-					<input class="search__input" type="search" placeholder="ПОИСК...">
-					<button class="search__btn"><img src="img/ico/search.svg" alt=""></button>
-				</div>
+				<form class="search" action = "/php/includes/filter.php/?type=<?=$type?>" method = "post">
+					<input class="search__input" type="search" name = "search" placeholder="ПОИСК...">
+					<button type = "submit" class="search__btn"><img src="img/ico/search.svg" alt=""></button>
+				</form>
 				<div class="social">
 					<a class="social__link" href="#"><img src="img/ico/facebook.svg" alt=""></a>
 					<a class="social__link" href="#"><img src="img/ico/instagram.svg" alt=""></a>
@@ -71,38 +76,7 @@
 		<main class="container main">
 			<?php
 				if(isset($_GET["type"])){
-					switch($_GET["type"]){
-						case "film":
-							include_once "php/news-pages/film.php";
-							break;
-						case "sport":
-							include_once "php/news-pages/sport.php";
-							break;
-						case "music":
-							include_once "php/news-pages/music.php";
-							break;
-						case "history":
-							include_once "php/news-pages/history.php";
-							break;
-						case "travel":
-							include_once "php/news-pages/travel.php";
-							break;
-						case "art":
-							include_once "php/news-pages/art.php";
-							break;
-						case "mode":
-							include_once "php/news-pages/mode.php";
-							break;
-						case "business":
-							include_once "php/news-pages/business.php";
-							break;
-						case "tech":
-							include_once "php/news-pages/tech.php";
-							break;
-						case "politic":
-							include_once "php/news-pages/politic.php";
-							break;
-					}
+					include_once "php/news-pages/art.php";
 				}
 				else{
 					include_once "php/news-pages/main.php";

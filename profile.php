@@ -34,10 +34,10 @@
 					<button class="search__btn"><img src="../img/ico/search.svg" alt=""></button>
 				</div>
 				<div class="social">
-					<a class="social__link" href="#"><img src="../img/ico/facebook.svg" alt=""></a>
-					<a class="social__link" href="#"><img src="../img/ico/instagram.svg" alt=""></a>
-					<a class="social__link" href="#"><img src="../img/ico/youtube.svg" alt=""></a>
-					<a class="social__link" href="#"><img src="../img/ico/twitter.svg" alt=""></a>
+					<a class="social__link" href="#"><img src="/img/ico/facebook.svg" alt=""></a>
+					<a class="social__link" href="#"><img src="/img/ico/instagram.svg" alt=""></a>
+					<a class="social__link" href="#"><img src="/img/ico/youtube.svg" alt=""></a>
+					<a class="social__link" href="#"><img src="/img/ico/twitter.svg" alt=""></a>
 				</div>
 			</div>
 			<div class="wrap-enter <?php
@@ -53,9 +53,9 @@
 																			echo "enter-btn_disabled";
 																		}
 																	?>">
-				<a class="wrap-enter__link mb-4" href="/profile.php"><img class="wrap-enter__img" src="img/ico/acount.svg" alt=""></a>
+				<a class="wrap-enter__link mb-4" href="/profile.php"><img class="wrap-enter__img" src="/img/ico/acount.svg" alt=""></a>
 				<p class = "text-white"><?=$_SESSION["user"]["name"]?></p>
-				<form action="php/includes/logout.php" method = "post">
+				<form action="/php/includes/logout.php" method = "post">
 					<button class="pl-5 pr-5 enter-btn">ВЫЙТИ</button>
 				</form>
 			</div>
@@ -82,7 +82,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form action = "php/includes/delete.php/?who=<?=$_GET["who"]?>" method = "POST">
+								<form action = "/php/includes/delete.php/?who=<?=$_GET["who"]?>" method = "POST">
 								<div class="form-group">
 										<label for="disabledSelect">Выберете</label>
 										<select id="disabledSelect" class="form-control" name = "option">
@@ -133,7 +133,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form action="php/includes/edit.php/?who=articles" method="POST">
+								<form action="/php/includes/edit.php/?who=articles" method="POST">
 									<div class="form-group">
 										<label>Введите ID
 										</label>
