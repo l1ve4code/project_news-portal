@@ -18,7 +18,7 @@
 	<link rel="shortcut icon" href="../img/star-media.png" type="image/png">
 	<link rel="stylesheet" href="libs/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/main.css">
-	<title>Document</title>
+	<title>STAR-MEDIA</title>
 </head>
 
 <body>
